@@ -24,7 +24,7 @@ func TestFunction(t *testing.T) {
 	var startTime, endTime int64
 	var startCounter, endCounter uint64
 
-	period := 1 * time.Second
+	period := 500 * time.Millisecond
 	startTime = time.Now().UnixNano()
 	startCounter = BenchmarkStart()
 	time.Sleep(time.Duration(period))
@@ -34,8 +34,8 @@ func TestFunction(t *testing.T) {
 	elapsed := float64(endTime-startTime) / 1000000000
 	fmt.Printf("%v s elapsed\n", elapsed)
 	fmt.Printf("%v cycles\n", endCounter-startCounter)
-	fmt.Printf("%v Hz\n", float64(endCounter-startCounter)/elapsed)
-	fmt.Printf("%v HZ!\n", Frequency(10, time.Duration(10*time.Millisecond)))
+	fmt.Printf("%.2e Hz\n", float64(endCounter-startCounter)/elapsed)
+	fmt.Printf("%.2e HZ!\n", Frequency(10, time.Duration(10*time.Millisecond)))
 
 	fmt.Println("overhead:")
 	startCounter = BenchmarkStart()

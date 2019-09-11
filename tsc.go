@@ -7,12 +7,13 @@ import (
 func BenchmarkStart() uint64
 func BenchmarkEnd() uint64
 func Rdtscp() (uint64, uint32)
+func Ticks() uint64
 
 // will take n*period to find out
 func Frequency(n int, period time.Duration) float64 {
 	var startTime, endTime time.Time
 	var startCounter, endCounter uint64
-	freq := 9.9e9
+	freq := 0.0
 	for i := 0; i < n; i++ {
 		startTime = time.Now()
 		startCounter = BenchmarkStart()
@@ -21,9 +22,13 @@ func Frequency(n int, period time.Duration) float64 {
 		endTime = time.Now()
 		elapsed := float64(endTime.UnixNano()-startTime.UnixNano()) / 1000000000
 		iterfreq := float64(endCounter-startCounter) / elapsed
-		if iterfreq < freq {
+		if iterfreq > freq {
 			freq = iterfreq
 		}
 	}
 	return freq
+}
+
+func Since(start uint64) int {
+	return int(Ticks() - start)
 }

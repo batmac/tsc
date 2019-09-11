@@ -1,4 +1,9 @@
-// https://www.intel.com/content/www/us/en/embedded/training/ia-32-ia-64-benchmark-code-execution-paper.html
+// https://www.intel.com/content/www/us/en/embedded/training/ia-32-ia-64-benchmark-code-execution-paper.html for the CPUID method.
+
+// the calls to CPUID are very slow (2k-3k cycles), although it 
+// is the proper way to do to benchmark code in between.
+// Using rdtscp() is enough if you don't want to slow as hell 
+// the rest of your code.
 
 #include "textflag.h"
 

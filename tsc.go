@@ -1,5 +1,7 @@
 package tsc
 
+//go:generate asmfmt -w tsc_amd64.s
+
 import (
 	"time"
 )

@@ -1,9 +1,9 @@
 // https://www.intel.com/content/www/us/en/embedded/training/ia-32-ia-64-benchmark-code-execution-paper.html for the CPUID method.
 
-// the calls to CPUID are very slow (2k-3k cycles), although it 
-// is the proper way to do to benchmark code between 
+// the calls to CPUID are very slow (2k-3k cycles), although it
+// is the proper way to do to benchmark code between
 // BenchmarkStart and BenchmarkEnd.
-// Using RDTSCP (with Ticks()) is enough if you don't want to 
+// Using RDTSCP (with Ticks()) is enough if you don't want to
 // slowdown as hell the rest of your code.
 
 #include "textflag.h"
@@ -46,6 +46,6 @@ TEXT ·Ticks(SB), NOSPLIT, $0
 // func Cpuid()
 // use to test CPUID overhead
 TEXT ·Cpuid(SB), NOSPLIT, $0
-    CPUID
+	CPUID
 	RET
 

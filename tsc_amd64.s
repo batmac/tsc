@@ -14,7 +14,7 @@ TEXT ·BenchmarkStart(SB), NOSPLIT, $0
 	RDTSC
 	SHLQ $32, DX
 	ORQ  DX, AX
-	MOVQ AX, r+0(FP)
+	MOVQ AX, ret+0(FP)
 	RET
 
 // func BenchmarkEnd() uint64
@@ -22,17 +22,17 @@ TEXT ·BenchmarkEnd(SB), NOSPLIT, $0
 	RDTSCP
 	SHLQ $32, DX
 	ORQ  DX, AX
-	MOVQ AX, r+0(FP)
+	MOVQ AX, ret+0(FP)
 	CPUID
 	RET
 
-// func Rdtscp() (uint64, uint32)
+// func Rdtscp() (ret uint64, cpu uint32)
 TEXT ·Rdtscp(SB), NOSPLIT, $0
 	RDTSCP
 	SHLQ $32, DX
 	ORQ  DX, AX
-	MOVQ AX, r+0(FP)
-	MOVQ CX, cpu+8(FP)
+	MOVQ AX, ret+0(FP)
+	MOVL CX, cpu+8(FP)
 	RET
 
 // func Ticks() uint64
@@ -40,6 +40,12 @@ TEXT ·Ticks(SB), NOSPLIT, $0
 	RDTSCP
 	SHLQ $32, DX
 	ORQ  DX, AX
-	MOVQ AX, r+0(FP)
+	MOVQ AX, ret+0(FP)
+	RET
+
+// func Cpuid()
+// use to test CPUID overhead
+TEXT ·Cpuid(SB), NOSPLIT, $0
+    CPUID
 	RET
 

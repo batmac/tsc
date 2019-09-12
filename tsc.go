@@ -4,11 +4,22 @@ import (
 	"time"
 )
 
+// BenchmarkStart start a benchmark
 func BenchmarkStart() uint64
+
+// BenchmarkEnd end a benchmark
 func BenchmarkEnd() uint64
-func Rdtscp() (uint64, uint32)
+
+// Rdtscp returns TSC and core ID if your OS support that (for instance, linux does, darwin dos not)
+func Rdtscp() (ret uint64, cpu uint32)
+
+// Ticks runs Rdtscp but only return TSC, so one less write (probably useless)
 func Ticks() uint64
 
+// Cpuid runs CPUID, mainly useful to benchmark it.
+func Cpuid()
+
+// Frequency returns your TSC frequency
 // will take n*period to find out
 func Frequency(n int, period time.Duration) float64 {
 	var startTime, endTime time.Time
@@ -29,6 +40,7 @@ func Frequency(n int, period time.Duration) float64 {
 	return freq
 }
 
-func Since(start uint64) int {
-	return int(Ticks() - start)
+// Since returns the ticks diff
+func Since(start uint64) uint64 {
+	return Ticks() - start
 }

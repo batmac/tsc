@@ -28,7 +28,13 @@ func cpuN() int {
 func TestRdtscp(t *testing.T) {
 	c := make(chan int)
 	var n int
+	var tick uint64
 	iterations := 100
+
+	tick, _ = Rdtscp()
+	if tick == 0 {
+		t.Fail()
+	}
 	// we pop a lot of goroutines, expecting at least one will be scheduled on another core
 	for i := 0; i < iterations; i++ {
 		go func() {

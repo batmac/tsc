@@ -1,0 +1,16 @@
+version: 1.0.{build}
+build_cloud: Docker
+image: Linux
+clone_depth: 3
+environment:
+  docker_image: golang:latest
+  docker_pull: always
+build: off
+test_script:
+- sh: >-
+    printenv
+    go version
+    go list -m all
+    go vet ./...
+    go test -v ./...
+deploy: off

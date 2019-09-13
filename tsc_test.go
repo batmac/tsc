@@ -9,7 +9,6 @@ import (
 
 var (
 	k       uint64
-	l       int
 	maxIter = 1000
 )
 

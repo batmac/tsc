@@ -1,0 +1,1 @@
+godoc: https://godoc.org/sbz.fr/tsc

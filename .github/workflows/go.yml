@@ -9,7 +9,7 @@ on:
 jobs:
   
  
-  golangci:
+  lint:
     name: lint
     runs-on: ubuntu-latest
     steps:
@@ -20,6 +20,13 @@ jobs:
           # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
           version: v1.30
           args: -v
+      - name: golangci-lint --enable-all (allowed to fail)
+        uses: golangci/golangci-lint-action@v1
+        continue-on-error: true
+        with:
+          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+          version: v1.30
+          args: -v --enable-all
 
   build:
     name: Build

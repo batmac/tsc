@@ -11,7 +11,7 @@ jobs:
     name: Build
     continue-on-error: ${{ matrix.legacy }}
     env:
-      GOPATH: ~/go
+      GOPATH: $HOME/go
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest, windows-latest]

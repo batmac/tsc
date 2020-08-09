@@ -16,7 +16,8 @@ jobs:
         go-version: [1.3.2, 1.7, 1.11, 1.12, 1.x.x]
         legacy: [true]
         include:
-        - go-version: ^1.13
+        - platform: ubuntu-latest
+          go-version: ^1.13
           legacy: false
          
     runs-on: ${{ matrix.platform }}

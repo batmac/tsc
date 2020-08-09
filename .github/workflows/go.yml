@@ -32,3 +32,11 @@ jobs:
 
     - name: Test
       run: go test -v .
+    
+    - name: Full Test
+      run: |
+        printenv
+        go version
+        go list -m all
+        go vet ./...
+        go test -v ./...

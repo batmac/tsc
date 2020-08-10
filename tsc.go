@@ -23,10 +23,12 @@ func Ticks() uint64
 func Cpuid()
 
 // Frequency returns your TSC frequency
-// will take n*period to find out
+// will take the max on "n" tries and
+// will take "period" to find out
 func Frequency(n int, period time.Duration) float64 {
 	var startTime, endTime time.Time
 	var startCounter, endCounter uint64
+	period /= time.Duration(n)
 	freq := 0.0
 	for i := 0; i < n; i++ {
 		startTime = time.Now()

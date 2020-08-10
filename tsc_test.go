@@ -132,6 +132,18 @@ func TestCPUIDOverhead(t *testing.T) {
 		Cpuid()
 	})
 }
+func TestFrequencySimple(t *testing.T) {
+	f := Frequency(1, time.Second)
+	t.Logf("Frequency found: %.2e", f)
+	if f <= 0 {
+		t.Fail()
+	}
+	f = Frequency(maxIter, time.Second)
+	t.Logf("Frequency found with %d tries: %.2e", maxIter, f)
+	if f <= 0 {
+		t.Fail()
+	}
+}
 func TestFrequency(t *testing.T) {
 	s := make([]float64, maxIter)
 	for i := 0; i < maxIter; i++ {
